@@ -93,10 +93,10 @@ class ReviewRating(models.Model):
     """ Review model for user with one to many relation ship, so one user can have write many reviews """
     
     user = models.ForeignKey(User, models.CASCADE)
-    book = models.ForeignKey(Book, models.CASCADE, null=True)
+    book = models.ForeignKey(Book, models.CASCADE)
     subject = models.TextField(max_length=100)
     review = models.TextField(max_length = 200)
-    rate = models.IntegerField(default=0)
+    rate = models.FloatField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now_add=True)
     

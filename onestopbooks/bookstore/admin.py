@@ -14,4 +14,4 @@ admin.site.register(Book, BookAdmin)
 admin.site.register(Order)
 admin.site.register(OrderItem)
 admin.site.register(RentItem)
-                    
+admin.site.register(ReviewRating)

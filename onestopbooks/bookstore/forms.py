@@ -16,4 +16,10 @@ class CustomerForm(ModelForm):
         model=Customer
         fields='__all__'
         exclude=['user']
-        
+
+class ReviewRatingForm(ModelForm):
+    """ Create form for review and rating """
+    class Meta:
+        model = ReviewRating
+        fields = ['subject', 'review', 'rate']
+

@@ -88,3 +88,17 @@ class RentItem(models.Model):
     quantity1 = models.IntegerField(default=0, null=True, blank=True) # quantity of that book in cart, default is at 0
     date_added1 = models.DateTimeField(auto_now_add=True)
     date_due1 = datetime.now() + timedelta(days=7)
+
+class ReviewRating(models.Model):
+    """ Review model for user with one to many relation ship, so one user can have write many reviews """
+    
+    user = models.ForeignKey(User, models.CASCADE)
+    book = models.ForeignKey(Book, models.CASCADE, null=True)
+    subject = models.TextField(max_length=100)
+    review = models.TextField(max_length = 200)
+    rate = models.IntegerField(default=0)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_update = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return str(self.rate)

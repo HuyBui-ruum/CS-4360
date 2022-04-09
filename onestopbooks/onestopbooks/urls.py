@@ -35,4 +35,5 @@ urlpatterns = [
     path('product/<str:isbn>', product_view, name='product'),
     path('update_item', update_item, name='update_item'),
     path('successcheckout/', successcheckout_view, name='successcheckout'),
+    path('submit_review/<int:book_isbn>', submit_review, name='submit_review'),
 ]

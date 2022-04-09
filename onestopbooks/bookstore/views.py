@@ -199,3 +199,35 @@ def search_results(request):
         return render(request, "search.html", {'books': books})
     else:
         return render(request, "search.html", {})
+
+
+def submit_review(request, book_isbn):
+    #return render(request, "home.html", {})
+
+    url = request.META.get('HTTP_REFERER')
+    #book = Book.objects.get(isbn = isbn)
+    #return render(request, "product.html", {'book': book})
+    if request.method == 'POST':
+        try:
+            # check if this user already reviewed
+            reviews = ReviewRating.objects.get(user__id=request.user.id, book__isbn=book_isbn)
+            form = ReviewRatingForm(request.POST, instance=reviews) # update review instead of create a new one
+            form.save()
+            messages.success(request, 'Thank you! Your review has been updated')
+            #book = Book.objects.get(isbn = book_isbn)
+            #return redirect('/')
+            return redirect(url)
+            #return redirect('/')
+            #return render(request, "product.html", {'book': book})
+        except ReviewRating.DoesNotExist:
+            form = ReviewRatingForm(request.POST)
+            if form.is_valid():
+                data = ReviewRating()
+                data.subject = form.cleaned_data['subject']
+                data.rate = form.cleaned_data['rate']
+                data.review = form.cleaned_data['review']
+                data.book_isbn = book_isbn
+                data.user_id = request.user.id
+                data.save()
+                #messages.success(request, 'Thank you! Your review has been submitted')
+                return redirect(url)
